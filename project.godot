@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Animal",
+"language": "GDScript",
+"path": "res://Scripts/Animal.gd"
+}, {
 "base": "Node",
 "class": "Tribes",
 "language": "GDScript",
 "path": "res://Scripts/globals/Tribes.gd"
 } ]
 _global_script_class_icons={
+"Animal": "",
 "Tribes": ""
 }
 
