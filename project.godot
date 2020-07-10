@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Tribes",
+"language": "GDScript",
+"path": "res://Scripts/globals/Tribes.gd"
+} ]
 _global_script_class_icons={
-
+"Tribes": ""
 }
 
 [application]
@@ -21,7 +26,18 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SceneSwitcher="*res://Scripts/autoloads/SceneSwitcher.gd"
+SceneSwitcher="*res://Scripts/globals/SceneSwitcher.gd"
+GlobalVariables="*res://Scripts/globals/GlobalVariables.gd"
+
+[display]
+
+window/size/width=960
+window/size/height=640
+
+[layer_names]
+
+2d_physics/layer_1="Animals"
+2d_physics/layer_2="Boundaries"
 
 [rendering]
 

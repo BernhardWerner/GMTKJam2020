@@ -28,7 +28,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2.2, 3.1, 4 ),
+"times": PoolRealArray( 2.2, 2.8, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -40,7 +40,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 4.4, 5.3, 6.2 ),
+"times": PoolRealArray( 4.4, 5, 6.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -64,7 +64,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.9, 1.8 ),
+"times": PoolRealArray( 0, 0.6, 1.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -74,27 +74,28 @@ tracks/4/keys = {
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
-modulate = Color( 0.00474382, 0.0512335, 0.0948767, 1 )
+modulate = Color( 0, 0, 0, 1 )
 scale = Vector2( 40, 30 )
 texture = ExtResource( 1 )
 
 [node name=" gmtk_logo" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.333333 )
-scale = Vector2( 0.5, 0.5 )
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 5 )
 
 [node name="godot_logo" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 4 )
 
 [node name="bluesoft_logo" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2( 0.98, 0.98 )
 current = true
-zoom = Vector2( 0.916667, 0.916667 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "booting"
