@@ -9,6 +9,8 @@ bounce = 1.0
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
+start_population = 1
+max_population = 300
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.176471, 0.364706, 0.239216, 1 )

@@ -1,7 +1,9 @@
 extends Node2D
 
 export var start_population := 10
-var max_population := 2 * start_population
+export var max_population := 20
+
+const animal_scene = preload("res://Scenes/Animal.tscn")
 
 ######################### SETTERS & GETTERS #########################
 
@@ -9,16 +11,25 @@ var max_population := 2 * start_population
 
 ######################### CUSTOM METHODS #########################
 
+func rand_pos() -> Vector2:
+	return GlobalVariables.living_space.position + Vector2(randf() * GlobalVariables.living_space.size.x, randf() * GlobalVariables.living_space.size.y)
 
+func spawn_animal(pos: Vector2, tribe: int) -> void:
+	var animal = animal_scene.instance()
+	animal.tribe = tribe
+	animal.global_position = pos
+	animal.connect("reproducing", self, "_on_Animal_reproducing")
+	$Animals.add_child(animal)
 
 ######################### BUILT-INS #########################
 
 func _ready() -> void:
-	var animal = preload("res://Scenes/Animal.tscn")
 	for i in range(start_population):
-		$Animals.add_child(animal.instance())
+		spawn_animal(rand_pos(), Tribes.PREY)
+		
 
 func _input(event: InputEvent) -> void:
+	##### DEBUG CONTROLS
 	if event is InputEventKey:
 		match event.scancode:
 			KEY_R:
@@ -28,8 +39,6 @@ func _input(event: InputEvent) -> void:
 				
 ######################### SIGNALS #########################
 
-func _on_Animal_reproducing(animal: Animal) -> void:
-	var offspring = preload("res://Scenes/Animal.tscn").instance()
-	add_child(offspring)
-	offspring.tribe = animal.tribe
-	offspring.global_position = animal.global_position
+func _on_Animal_reproducing(pos: Vector2, tribe: int) -> void:
+	if $Animals.get_child_count() < max_population:
+		spawn_animal(pos, tribe)

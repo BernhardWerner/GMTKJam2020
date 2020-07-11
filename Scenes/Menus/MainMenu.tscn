@@ -1,24 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Graphics/icons/rect64x64.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/fonts/Kenney Mini.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
 outline_size = 5
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -62,7 +64,7 @@ margin_right = 398.0
 margin_bottom = 173.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Hunt 	"
+text = "Prey"
 align = 1
 valign = 1
 
@@ -72,23 +74,23 @@ margin_right = 398.0
 margin_bottom = 555.0
 custom_constants/separation = 50
 
-[node name="Button1" type="Button" parent="HBoxContainer/VBoxContainer1/VBoxContainer"]
-margin_left = 73.0
-margin_right = 323.0
+[node name="StartButton" type="Button" parent="HBoxContainer/VBoxContainer1/VBoxContainer"]
+margin_left = 74.0
+margin_right = 324.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 250, 0 )
 size_flags_horizontal = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Start"
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer1/VBoxContainer"]
-margin_left = 73.0
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer1/VBoxContainer"]
+margin_left = 74.0
 margin_top = 116.0
-margin_right = 323.0
+margin_right = 324.0
 margin_bottom = 182.0
 rect_min_size = Vector2( 250, 0 )
 size_flags_horizontal = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Quit"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
@@ -100,6 +102,8 @@ size_flags_horizontal = 7
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
 margin_right = 398.0
 margin_bottom = 83.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "The animals are out of control!"
 autowrap = true
+[connection signal="pressed" from="HBoxContainer/VBoxContainer1/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer1/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
