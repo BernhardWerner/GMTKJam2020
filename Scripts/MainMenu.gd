@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func _on_StartButton_pressed() -> void:
-	SceneSwitcher.goto_scene("res://Scenes/Level.tscn")
+	SceneSwitcher.goto_scene("res://Scenes/GameManager.tscn")
 
 
 func _on_QuitButton_pressed() -> void:

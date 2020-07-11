@@ -1,0 +1,177 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/GameManager.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Graphics/fonts/Kenney Mini.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 36
+font_data = ExtResource( 3 )
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Level" parent="." instance=ExtResource( 2 )]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="StartInstructions" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/StartInstructions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 16.0
+margin_right = -32.0
+margin_bottom = -16.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxLeft" type="VBoxContainer" parent="GUI/StartInstructions/HBoxContainer"]
+margin_right = 431.0
+margin_bottom = 608.0
+custom_constants/separation = 50
+
+[node name="Title" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft"]
+margin_right = 431.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "Predator versus Prey"
+
+[node name="InfoBox" type="VBoxContainer" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft"]
+margin_top = 95.0
+margin_right = 431.0
+margin_bottom = 545.0
+custom_constants/separation = 40
+
+[node name="PopNumber" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_right = 431.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 2 )
+text = "Curent population: 50"
+
+[node name="Speeds" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_top = 70.0
+margin_right = 431.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 2 )
+text = "Speed ratio 3 : 1"
+
+[node name="PreyTime" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_top = 140.0
+margin_right = 431.0
+margin_bottom = 170.0
+custom_fonts/font = SubResource( 2 )
+text = "Prey procreation: 1 sec"
+
+[node name="HunterTime" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_top = 210.0
+margin_right = 431.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 2 )
+text = "Predator survival: 3 sec"
+
+[node name="HunterRatio" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_top = 280.0
+margin_right = 431.0
+margin_bottom = 310.0
+custom_fonts/font = SubResource( 2 )
+text = "Predator ratio: 10%"
+
+[node name="HunterHunger" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_top = 350.0
+margin_right = 431.0
+margin_bottom = 380.0
+custom_fonts/font = SubResource( 2 )
+text = "Predator hunger: 3 "
+
+[node name="ObsTime" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox"]
+margin_top = 420.0
+margin_right = 431.0
+margin_bottom = 450.0
+custom_fonts/font = SubResource( 2 )
+text = "Observation time: 30 sec"
+
+[node name="VBoxRight" type="VBoxContainer" parent="GUI/StartInstructions/HBoxContainer"]
+margin_left = 451.0
+margin_right = 889.0
+margin_bottom = 608.0
+custom_constants/separation = 100
+alignment = 2
+
+[node name="Label" type="Label" parent="GUI/StartInstructions/HBoxContainer/VBoxRight"]
+margin_top = 235.0
+margin_right = 438.0
+margin_bottom = 295.0
+custom_fonts/font = SubResource( 3 )
+text = "Who will survive?"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/StartInstructions/HBoxContainer/VBoxRight"]
+margin_top = 395.0
+margin_right = 438.0
+margin_bottom = 608.0
+custom_constants/separation = 30
+
+[node name="HunterButton" type="Button" parent="GUI/StartInstructions/HBoxContainer/VBoxRight/VBoxContainer"]
+margin_left = 94.0
+margin_right = 344.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 4 )
+text = "Predator"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PreyButton" type="Button" parent="GUI/StartInstructions/HBoxContainer/VBoxRight/VBoxContainer"]
+margin_left = 94.0
+margin_top = 81.0
+margin_right = 344.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 4 )
+text = "Prey"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BothButton" type="Button" parent="GUI/StartInstructions/HBoxContainer/VBoxRight/VBoxContainer"]
+margin_left = 94.0
+margin_top = 162.0
+margin_right = 344.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 4 )
+text = "Both"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ObservationTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="pressed" from="GUI/StartInstructions/HBoxContainer/VBoxRight/VBoxContainer/HunterButton" to="." method="_on_HunterButton_pressed"]
+[connection signal="pressed" from="GUI/StartInstructions/HBoxContainer/VBoxRight/VBoxContainer/PreyButton" to="." method="_on_PreyButton_pressed"]
+[connection signal="pressed" from="GUI/StartInstructions/HBoxContainer/VBoxRight/VBoxContainer/BothButton" to="." method="_on_BothButton_pressed"]

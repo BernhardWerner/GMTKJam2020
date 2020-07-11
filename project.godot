@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Animal.gd"
 }, {
+"base": "Node2D",
+"class": "LevelManager",
+"language": "GDScript",
+"path": "res://Scripts/LevelManager.gd"
+}, {
 "base": "Node",
 "class": "Math",
 "language": "GDScript",
@@ -22,10 +27,11 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "Tribes",
 "language": "GDScript",
-"path": "res://TribeData/Tribes.gd"
+"path": "res://Scripts/Tribes.gd"
 } ]
 _global_script_class_icons={
 "Animal": "",
+"LevelManager": "",
 "Math": "",
 "Tribes": ""
 }

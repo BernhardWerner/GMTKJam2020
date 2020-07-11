@@ -1,4 +1,6 @@
 extends Node2D
+class_name LevelManager
+
 
 export var tribe_data : Resource
 export var start_population := 10
@@ -11,6 +13,11 @@ const animal_scene = preload("res://Scenes/Animal.tscn")
 
 
 ######################### CUSTOM METHODS #########################
+
+func populate_level() -> void:
+	if tribe_data:
+		for i in range(start_population):
+			spawn_animal(Math.rand_pos(), Tribes.HUNTER if randf() < tribe_data.hunter_ratio else Tribes.PREY)
 
 
 func spawn_animal(pos: Vector2, tribe: int) -> void:
@@ -34,8 +41,7 @@ func spawn_animal(pos: Vector2, tribe: int) -> void:
 ######################### BUILT-INS #########################
 
 func _ready() -> void:
-	for i in range(start_population):
-		spawn_animal(Math.rand_pos(), Tribes.HUNTER if randf() < tribe_data.hunter_ratio else Tribes.PREY)
+	pass
 		
 
 func _input(event: InputEvent) -> void:

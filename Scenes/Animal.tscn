@@ -15,6 +15,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+region_rect = Rect2( -7.04563, -3.17404, 28.6947, 24.0186 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -1,12 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/icons/rect64x64.png" type="Texture" id=2]
 [ext_resource path="res://TribeData/tribes00.tres" type="Resource" id=3]
+[ext_resource path="res://Graphics/fonts/Kenney Mini.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 bounce = 1.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,3 +38,20 @@ physics_material_override = SubResource( 1 )
 polygon = PoolVector2Array( -64, -64, 1024, -64, 1024, 704, -64, 704, -64, 0, 0, 0, 0, 640, 960, 640, 960, 0, -64, 0 )
 
 [node name="Animals" type="YSort" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ObservationTimeLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -480.0
+margin_top = 16.0
+margin_right = -32.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 2 )
+text = "Time left: 60"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
