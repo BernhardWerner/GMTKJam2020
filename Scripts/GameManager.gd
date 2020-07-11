@@ -2,6 +2,8 @@ extends Node2D
 
 export var number_of_levels := 3
 
+var all_possible_tribes := []
+
 var level_index := 0
 var player_choices := []
 var current_tribe_data := preload("res://TribeData/tribes00.tres")
@@ -21,6 +23,24 @@ onready var info_obs_time := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoB
 
 ######################### CUSTOM METHODS #########################
 
+func list_files_in_directory(path: String) -> Array:
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files
+	
+	
 func start_level() -> void:
 	$GUI/StartInstructions.hide()
 	$Level.tribe_data = current_tribe_data
@@ -40,6 +60,9 @@ func update_info_box() -> void:
 ######################### BUILT-INS #########################
 
 func _ready() -> void:
+	all_possible_tribes = list_files_in_directory("res://TribeData/")
+	all_possible_tribes.shuffle()
+	print_debug("res://TribeData/" + all_possible_tribes[0])
 	update_info_box()
 	$Level/CanvasLayer/ObservationTimeLabel.text = "Time left: " + current_observation_time as String
 	$ObservationTimer.wait_time = current_observation_time
