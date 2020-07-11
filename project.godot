@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://Scripts/Animal.gd"
 }, {
 "base": "Node",
+"class": "Math",
+"language": "GDScript",
+"path": "res://Scripts/globals/Math.gd"
+}, {
+"base": "Resource",
 "class": "Tribes",
 "language": "GDScript",
-"path": "res://Scripts/globals/Tribes.gd"
+"path": "res://TribeData/Tribes.gd"
 } ]
 _global_script_class_icons={
 "Animal": "",
+"Math": "",
 "Tribes": ""
 }
 
@@ -46,6 +52,7 @@ window/size/height=640
 
 2d_physics/layer_1="Animals"
 2d_physics/layer_2="Boundaries"
+2d_physics/layer_3="PerceptionAreas"
 
 [rendering]
 

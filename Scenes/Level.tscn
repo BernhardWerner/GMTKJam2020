@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/icons/rect64x64.png" type="Texture" id=2]
+[ext_resource path="res://TribeData/tribes00.tres" type="Resource" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -9,8 +10,9 @@ bounce = 1.0
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
-start_population = 1
-max_population = 300
+tribe_data = ExtResource( 3 )
+start_population = 30
+max_population = 100
 
 [node name="Background" type="Sprite" parent="."]
 modulate = Color( 0.176471, 0.364706, 0.239216, 1 )
@@ -28,4 +30,4 @@ physics_material_override = SubResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundary"]
 polygon = PoolVector2Array( -64, -64, 1024, -64, 1024, 704, -64, 704, -64, 0, 0, 0, 0, 640, 960, 640, 960, 0, -64, 0 )
 
-[node name="Animals" type="Node" parent="."]
+[node name="Animals" type="YSort" parent="."]
