@@ -17,11 +17,11 @@ func _ready() -> void:
 
 
 func _on_FiveButton_pressed() -> void:
-	pass # Replace with function body.
+	SceneSwitcher.goto_scene("res://Scenes/BestOf5.tscn")
 
 
 func _on_EndlessButton_pressed() -> void:
-	pass # Replace with function body.
+	SceneSwitcher.goto_scene("res://Scenes/Endless.tscn")
 
 
 func _on_BackButton_pressed() -> void:
@@ -29,4 +29,4 @@ func _on_BackButton_pressed() -> void:
 
 
 func _on_TenButton_pressed() -> void:
-	pass # Replace with function body.
+	SceneSwitcher.goto_scene("res://Scenes/BestOf10.tscn")

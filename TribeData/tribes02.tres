@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Tribes.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+hunter_ratio = 0.25
+hunter_food_threshold = 5
+colors = [ Color( 1, 0.84, 0, 1 ), Color( 0, 1, 1, 1 ) ]
+speeds = [ 200.0, 200.0 ]
+ages_mean = [ 4.0, 1.0 ]
+ages_range = [ 0.2, 0.4 ]

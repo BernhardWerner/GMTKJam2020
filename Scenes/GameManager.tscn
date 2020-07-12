@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=2]
@@ -38,6 +38,10 @@ size = 48
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=9]
+size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=10]
 size = 36
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
@@ -284,21 +288,29 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="OverallResult/VBoxContainer"]
-margin_top = 190.0
+margin_top = 111.0
 margin_right = 896.0
-margin_bottom = 253.0
+margin_bottom = 174.0
 custom_fonts/font = SubResource( 7 )
 text = "Research finished!"
 align = 1
 
-[node name="QuitButton" type="Button" parent="OverallResult/VBoxContainer"]
-margin_left = 148.0
-margin_top = 353.0
-margin_right = 748.0
-margin_bottom = 417.0
-rect_min_size = Vector2( 600, 0 )
-size_flags_horizontal = 4
+[node name="Result" type="Label" parent="OverallResult/VBoxContainer"]
+margin_top = 274.0
+margin_right = 896.0
+margin_bottom = 332.0
 custom_fonts/font = SubResource( 8 )
+text = "You've been 50% correct!"
+align = 1
+
+[node name="QuitButton" type="Button" parent="OverallResult/VBoxContainer"]
+margin_left = 247.0
+margin_top = 432.0
+margin_right = 647.0
+margin_bottom = 496.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 9 )
 text = "Back to main menu"
 
 [node name="ObservationTimeLabel" type="Label" parent="."]
@@ -310,7 +322,7 @@ margin_top = 14.0
 margin_right = 928.0
 margin_bottom = 58.0
 mouse_filter = 0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 text = "Time left: 60"
 align = 2
 __meta__ = {

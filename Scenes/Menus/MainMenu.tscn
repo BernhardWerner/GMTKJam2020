@@ -139,7 +139,7 @@ anchor_bottom = 1.0
 custom_fonts/font = SubResource( 4 )
 text = "You are not in control either! 
 
-You only get the delayed and inaccurate data from the field researchers and you have to make the best guesses how various biomes will develop."
+You only get the delayed and inaccurate data from the field researchers and you have to make the best guesses on how various biomes will develop."
 autowrap = true
 
 [node name="Page3" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]

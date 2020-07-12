@@ -62,7 +62,7 @@ text = "There are 3 modes you can choose from:
 
 - \"Best of 5\" where you are presented 5 biomes and you are judged on the relative amount of correct guesses you made.
 - \"Best of 10\" which is the same with 10 biomes.
-- \"Endless\" where your run ends as soon as to guess wrong two times in a row and you are judged on the absolute amount of correct guesses you made.
+- \"Endless\" where your run ends as soon as you guess wrong two times in a row and you are judged on the absolute amount of correct guesses you made.
 
 In any mode, the first 5 biomes are identical and fixed. So, you can see \" Best of 5\" as your training mode. Any further biomes are completely random... wherever research might take you..."
 autowrap = true
