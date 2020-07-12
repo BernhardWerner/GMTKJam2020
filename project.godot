@@ -53,6 +53,7 @@ GlobalVariables="*res://Scripts/globals/GlobalVariables.gd"
 
 window/size/width=960
 window/size/height=640
+window/size/resizable=false
 
 [layer_names]
 

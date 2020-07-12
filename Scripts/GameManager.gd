@@ -14,13 +14,13 @@ var current_observation_time := 30
 
 var actual_results := []
 
-onready var info_pop_number := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/PopNumber
-onready var info_speed := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/Speeds
-onready var info_prey_time := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/PreyTime
-onready var info_hunter_time := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/HunterTime
-onready var info_hunter_ratio := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/HunterRatio
-onready var info_hunter_hunger := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/HunterHunger
-onready var info_obs_time := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/ObsTime
+onready var info_pop_number := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/PopNumber
+onready var info_speed := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/Speeds
+onready var info_prey_time := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/PreyTime
+onready var info_hunter_time := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/HunterTime
+onready var info_hunter_ratio := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/HunterRatio
+onready var info_hunter_hunger := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/HunterHunger
+onready var info_obs_time := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/ObsTime
 
 ######################### SETTERS & GETTERS #########################
 
@@ -29,11 +29,11 @@ onready var info_obs_time := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoB
 ######################### CUSTOM METHODS #########################
 
 func finish_round() -> void:
-	$Level/CanvasLayer/ObservationTimeLabel.hide()
-	$GUI/RoundResult.show()
+	$ObservationTimeLabel.hide()
+	$RoundResult.show()
 
 func finish_run() -> void:
-	$GUI/OverallResult.show()
+	$OverallResult.show()
 
 func list_files_in_directory(path: String) -> Array:
 	var files = []
@@ -56,7 +56,7 @@ func list_files_in_directory(path: String) -> Array:
 
 func prepare_round() -> void:
 	all_possible_tribes = list_files_in_directory("res://TribeData/")
-	if levels_completed < 5:
+	if levels_completed < -1:
 		current_tribe_data = load("res://TribeData/" + all_possible_tribes[levels_completed])
 	else:
 		current_tribe_data = load("res://TribeData/" + all_possible_tribes.back())
@@ -66,12 +66,12 @@ func prepare_round() -> void:
 
 func start_round() -> void:
 	prepare_round()
-	$GUI/StartInstructions.hide()
+	$StartInstructions.hide()
 	$Level.tribe_data = current_tribe_data
 	$Level.populate_level()
 	$ObservationTimer.start()
-	$Level/CanvasLayer/ObservationTimeLabel.show()
-	$Level/CanvasLayer/ObservationTimeLabel.text = "Time left: " + current_observation_time as String
+	$ObservationTimeLabel.show()
+	$ObservationTimeLabel.text = "Time left: " + current_observation_time as String
 	$ObservationTimer.wait_time = current_observation_time
 	$ObservationTimer.start()
 
@@ -101,7 +101,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	$Level/CanvasLayer/ObservationTimeLabel.text = "Time left: " + round($ObservationTimer.time_left) as String
+	$ObservationTimeLabel.text = "Time left: " + round($ObservationTimer.time_left) as String
 
 ######################### SIGNALS #########################
 
@@ -123,28 +123,28 @@ func _on_PreyButton_pressed() -> void:
 	start_round()
 
 func _on_ObservationTimer_timeout() -> void:
-	get_tree().paused = true
-	var survivors := $Level/Animals.get_children()
-	if survivors.size() == 0:
-		actual_results.push_back(0)
-	else:
-		var found_hunter := false
-		for animal in survivors:
-			if animal.tribe == Tribes.HUNTER:
-				found_hunter = true
-				break
-		actual_results.push_back(2 if found_hunter else 1)
-	
-	for animal in survivors:
-		animal.queue_free()
-	
+#	get_tree().paused = true
+#	var survivors := $Level/Animals.get_children()
+#	if survivors.size() == 0:
+#		actual_results.push_back(0)
+#	else:
+#		var found_hunter := false
+#		for animal in survivors:
+#			if animal.tribe == Tribes.HUNTER:
+#				found_hunter = true
+#				break
+#		actual_results.push_back(2 if found_hunter else 1)
+#
+#	for animal in survivors:
+#		animal.queue_free()
+#
 	levels_completed += 1
 	if levels_completed >= number_of_levels:
 		finish_run()
 	else:
 		finish_round()
-	
-	
+
+
 
 
 func _on_QuitButton_pressed() -> void:
@@ -153,10 +153,10 @@ func _on_QuitButton_pressed() -> void:
 
 func _on_ContinueButton_pressed() -> void:
 	prepare_round()
-	$GUI/RoundResult.hide()
-	$GUI/StartInstructions.show()
+	$RoundResult.hide()
+	$StartInstructions.show()
 	
 func _on_Animal_dying() -> void:
-	if $Level/Animals.get_child_count() == 0:
+	if $Level/Animals.get_child_count() <= 1:
 		$ObservationTimer.stop()
 		$ObservationTimer.emit_signal("timeout")
