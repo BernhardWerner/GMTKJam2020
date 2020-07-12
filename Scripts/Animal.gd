@@ -16,6 +16,7 @@ onready var sprite := $Sprite
 onready var age_timer := $AgeTimer
 
 signal reproducing(ani)
+signal dead
 
 ######################### SETTERS & GETTERS #########################
 
@@ -27,8 +28,8 @@ func setup() -> void:
 	if tribe == Tribes.PREY:
 		$PerceptionArea.queue_free()
 	sprite.texture = sprite_texture 
-	sprite.material = preload("res://Materials/Animal.material").duplicate()
-	sprite.material.set_shader_param("rim_color", color)
+#	sprite.material = preload("res://Materials/Animal.material").duplicate()
+#	sprite.material.set_shader_param("rim_color", color)
 	age_timer.wait_time = end_age
 	age_timer.start()
 
@@ -52,6 +53,7 @@ func _physics_process(delta: float) -> void:
 func _on_AgeTimer_timeout() -> void:
 	match tribe:
 		Tribes.HUNTER:
+			emit_signal("dead")
 			self.queue_free()
 		Tribes.PREY:
 			emit_signal("reproducing", self)

@@ -1,14 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Graphics/icons/rect64x64.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/fonts/AGENCYR.TTF" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://Graphics/fonts/AGENCYB.TTF" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
-outline_size = 10
-outline_color = Color( 0, 0, 0, 1 )
+outline_size = 5
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -16,8 +14,16 @@ size = 48
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 32
+size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 40
+font_data = ExtResource( 4 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -27,15 +33,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color( 0.176471, 0.364706, 0.239216, 1 )
+[node name="TextureRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color( 0.176471, 0.364706, 0.239216, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -65,7 +66,7 @@ margin_top = 57.0
 margin_right = 398.0
 margin_bottom = 173.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hunt"
 align = 1
 valign = 1
@@ -95,17 +96,149 @@ size_flags_horizontal = 4
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="TutorialBox" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 498.0
 margin_right = 896.0
 margin_bottom = 608.0
 size_flags_horizontal = 7
+size_flags_vertical = 5
+custom_constants/separation = 30
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="HBoxContainer/TutorialBox"]
 margin_right = 398.0
-margin_bottom = 39.0
+margin_bottom = 58.0
 custom_fonts/font = SubResource( 3 )
-text = "The animals are out of control!"
+text = "How to play"
+align = 1
+
+[node name="TutorialContent" type="Control" parent="HBoxContainer/TutorialBox"]
+margin_top = 88.0
+margin_right = 398.0
+margin_bottom = 488.0
+rect_min_size = Vector2( 0, 400 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page1" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+margin_right = 398.0
+margin_bottom = 4893.0
+custom_fonts/font = SubResource( 4 )
+text = "The animals are out of control!!
+
+They move, eat and reproduce much faster and you are a scientist who wants to study this phenomenon. Unfortunately..."
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page2" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "You are not in control either! 
+
+You only get the delayed and inaccurate data from the field researchers and you have to make the best guesses how various biomes will develop."
+autowrap = true
+
+[node name="Page3" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "For your project, you get various information about only two different species of animals: rabbits and wolves. 
+
+Rabbits, represented by white dots, eat grass and reproduce after a certain amount of time.
+
+Wolfs, represented by black dots, need to hunt and eat rabbits to survive. Otherwise, they die after a certain amount of time. If they eat enough, they will reproduce."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page7" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "For each biome you have to decide, which species survives: both, only the rabbits or none.
+
+The more biomes you judge correctly the higher your prestige as a researcher will be at the end!!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page4" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "The information you get is the following.
+1. Current population: the total amount of animals in this biome
+2. Speed ratio: how much faster the wolves are than the rabbits
+3. Rabbit procreation: how long it takes a rabbit to reproduce
+..."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page5" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "4. Wolf survial: how long a wolf can survive without eating
+5. Wolf ratio: which perecentage of the total population are wolves
+6. Wolf hunger: how many rabbits a wolf has to eat to be able to reproduce
+7. Observation time: how long you are allowed to study this biome"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page6" type="Label" parent="HBoxContainer/TutorialBox/TutorialContent"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "But watch out... The information you get from your colleagues might not be 100% correct. After all... scientific data is never perfectly accurate... And humans make errors...
+
+So, good luck!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialButtonBox" type="HBoxContainer" parent="HBoxContainer/TutorialBox"]
+margin_top = 518.0
+margin_right = 398.0
+margin_bottom = 573.0
+custom_constants/separation = 200
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftButton" type="Button" parent="HBoxContainer/TutorialBox/TutorialButtonBox"]
+margin_left = 49.0
+margin_right = 99.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 50, 50 )
+custom_fonts/font = SubResource( 5 )
+disabled = true
+text = "<"
+
+[node name="RightButton" type="Button" parent="HBoxContainer/TutorialBox/TutorialButtonBox"]
+margin_left = 299.0
+margin_right = 349.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 50, 50 )
+custom_fonts/font = SubResource( 5 )
+text = ">"
 [connection signal="pressed" from="HBoxContainer/VBoxContainer1/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer1/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/TutorialBox/TutorialButtonBox/LeftButton" to="." method="_on_LeftButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/TutorialBox/TutorialButtonBox/RightButton" to="." method="_on_RightButton_pressed"]

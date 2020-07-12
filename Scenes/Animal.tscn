@@ -3,10 +3,10 @@
 [ext_resource path="res://Graphics/icons/circ16x16white.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Animal.gd" type="Script" id=2]
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 8.0
 
 [node name="Animal" type="KinematicBody2D"]
@@ -19,7 +19,7 @@ region_rect = Rect2( -7.04563, -3.17404, 28.6947, 24.0186 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="AgeTimer" type="Timer" parent="."]
 
@@ -28,6 +28,6 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PerceptionArea"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 [connection signal="timeout" from="AgeTimer" to="." method="_on_AgeTimer_timeout"]
 [connection signal="body_entered" from="PerceptionArea" to="." method="_on_PerceptionArea_body_entered"]

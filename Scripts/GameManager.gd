@@ -1,13 +1,18 @@
 extends Node2D
 
-export var number_of_levels := 3
+enum MODES {FIVE, TEN, ENDLESS}
+
+var mode : int = MODES.FIVE
+var number_of_levels := 5
 
 var all_possible_tribes := []
 
-var level_index := 0
+var levels_completed := 0
 var player_choices := []
 var current_tribe_data := preload("res://TribeData/tribes00.tres")
 var current_observation_time := 30
+
+var actual_results := []
 
 onready var info_pop_number := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/PopNumber
 onready var info_speed := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoBox/Speeds
@@ -22,6 +27,13 @@ onready var info_obs_time := $GUI/StartInstructions/HBoxContainer/VBoxLeft/InfoB
 
 
 ######################### CUSTOM METHODS #########################
+
+func finish_round() -> void:
+	$Level/CanvasLayer/ObservationTimeLabel.hide()
+	$GUI/RoundResult.show()
+
+func finish_run() -> void:
+	$GUI/OverallResult.show()
 
 func list_files_in_directory(path: String) -> Array:
 	var files = []
@@ -39,14 +51,31 @@ func list_files_in_directory(path: String) -> Array:
 	dir.list_dir_end()
 
 	return files
-	
-	
-func start_level() -> void:
+
+
+
+func prepare_round() -> void:
+	all_possible_tribes = list_files_in_directory("res://TribeData/")
+	if levels_completed < 5:
+		current_tribe_data = load("res://TribeData/" + all_possible_tribes[levels_completed])
+	else:
+		current_tribe_data = load("res://TribeData/" + all_possible_tribes.back())
+	update_info_box()
+
+
+
+func start_round() -> void:
+	prepare_round()
 	$GUI/StartInstructions.hide()
 	$Level.tribe_data = current_tribe_data
 	$Level.populate_level()
 	$ObservationTimer.start()
 	$Level/CanvasLayer/ObservationTimeLabel.show()
+	$Level/CanvasLayer/ObservationTimeLabel.text = "Time left: " + current_observation_time as String
+	$ObservationTimer.wait_time = current_observation_time
+	$ObservationTimer.start()
+
+
 
 func update_info_box() -> void:
 	info_pop_number.text    = "Current population:   " + $Level.start_population as String
@@ -60,12 +89,15 @@ func update_info_box() -> void:
 ######################### BUILT-INS #########################
 
 func _ready() -> void:
-	all_possible_tribes = list_files_in_directory("res://TribeData/")
-	all_possible_tribes.shuffle()
-	current_tribe_data = load("res://TribeData/" + all_possible_tribes[0])
-	update_info_box()
-	$Level/CanvasLayer/ObservationTimeLabel.text = "Time left: " + current_observation_time as String
-	$ObservationTimer.wait_time = current_observation_time
+	match mode:
+		MODES.FIVE:
+			number_of_levels = 5
+		MODES.TEN:
+			number_of_levels = 10
+		MODES.ENDLESS:
+			number_of_levels = 1000
+
+	prepare_round()
 
 
 func _process(delta: float) -> void:
@@ -74,17 +106,57 @@ func _process(delta: float) -> void:
 ######################### SIGNALS #########################
 
 
-func _on_HunterButton_pressed() -> void:
-	player_choices.push_back(Tribes.HUNTER)
-	start_level()
-
-
-func _on_PreyButton_pressed() -> void:
-	player_choices.push_back(Tribes.PREY)
-	start_level()
 
 
 func _on_BothButton_pressed() -> void:
-	player_choices.push_back(-1)
-	start_level()
+	player_choices.push_back(2)
+	start_round()
+
+
+func _on_NoneButton_pressed() -> void:
+	player_choices.push_back(1)
+	start_round()
+
+
+func _on_PreyButton_pressed() -> void:
+	player_choices.push_back(0)
+	start_round()
+
+func _on_ObservationTimer_timeout() -> void:
+	get_tree().paused = true
+	var survivors := $Level/Animals.get_children()
+	if survivors.size() == 0:
+		actual_results.push_back(0)
+	else:
+		var found_hunter := false
+		for animal in survivors:
+			if animal.tribe == Tribes.HUNTER:
+				found_hunter = true
+				break
+		actual_results.push_back(2 if found_hunter else 1)
 	
+	for animal in survivors:
+		animal.queue_free()
+	
+	levels_completed += 1
+	if levels_completed >= number_of_levels:
+		finish_run()
+	else:
+		finish_round()
+	
+	
+
+
+func _on_QuitButton_pressed() -> void:
+	SceneSwitcher.go_home()
+
+
+func _on_ContinueButton_pressed() -> void:
+	prepare_round()
+	$GUI/RoundResult.hide()
+	$GUI/StartInstructions.show()
+	
+func _on_Animal_dying() -> void:
+	if $Level/Animals.get_child_count() == 0:
+		$ObservationTimer.stop()
+		$ObservationTimer.emit_signal("timeout")
