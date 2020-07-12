@@ -8,6 +8,9 @@ export var max_population := 20
 
 const animal_scene = preload("res://Scenes/Animal.tscn")
 
+const animal_sprites = [preload("res://Graphics/icons/circ16x16black.png"), preload("res://Graphics/icons/circ16x16white.png")]
+
+
 ######################### SETTERS & GETTERS #########################
 
 
@@ -28,15 +31,18 @@ func spawn_animal(pos: Vector2, tribe: int) -> void:
 	animal.hunter_food_threshold = tribe_data.hunter_food_threshold
 	
 	animal.color = tribe_data.colors[tribe]
+	animal.sprite_texture = animal_sprites[tribe]
 	animal.speed = tribe_data.speeds[tribe]
 	animal.dir = Math.rand_dir()
 	animal.end_age = tribe_data.ages_mean[tribe] + (randf() - 1) * tribe_data.ages_range[tribe]
-	
-	
-
 	animal.connect("reproducing", self, "_on_Animal_reproducing")
-
+	
 	$Animals.add_child(animal)
+
+	
+	
+
+
 
 ######################### BUILT-INS #########################
 

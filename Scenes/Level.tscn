@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/icons/rect64x64.png" type="Texture" id=2]
 [ext_resource path="res://TribeData/tribes00.tres" type="Resource" id=3]
-[ext_resource path="res://Graphics/fonts/Kenney Mini.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Graphics/fonts/AGENCYB.TTF" type="DynamicFontData" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -14,6 +14,14 @@ size = 36
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
+
+[sub_resource type="Environment" id=3]
+background_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/5 = false
+glow_strength = 1.2
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -55,3 +63,6 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )

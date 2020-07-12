@@ -6,6 +6,7 @@ var dir : Vector2
 var speed : float
 
 var color : Color
+var sprite_texture : Texture
 var end_age : float
 var hunter_food_threshold : int
 
@@ -22,16 +23,19 @@ signal reproducing(ani)
 
 ######################### CUSTOM METHODS #########################
 
-
+func setup() -> void:
+	if tribe == Tribes.PREY:
+		$PerceptionArea.queue_free()
+	sprite.texture = sprite_texture 
+	sprite.material = preload("res://Materials/Animal.material").duplicate()
+	sprite.material.set_shader_param("rim_color", color)
+	age_timer.wait_time = end_age
+	age_timer.start()
 
 ######################### BUILT-INS #########################
 
 func _ready() -> void:
-	if tribe == Tribes.PREY:
-		$PerceptionArea.queue_free()
-	sprite.modulate = color
-	age_timer.wait_time = end_age
-	age_timer.start()
+	setup()
 
 
 func _physics_process(delta: float) -> void:
