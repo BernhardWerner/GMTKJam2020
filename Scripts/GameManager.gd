@@ -115,10 +115,10 @@ func start_round() -> void:
 func update_info_box() -> void:
 	info_pop_number.text    = "Current population:   " + $Level.start_population as String
 	info_speed.text         = "Speed ratio:   "  + (0.1 * round(10 * current_tribe_data.speeds[Tribes.HUNTER] / current_tribe_data.speeds[Tribes.PREY])) as String + " : 1"
-	info_prey_time.text     = "Prey procreation:   " + current_tribe_data.ages_mean[Tribes.PREY] as String + " sec"
-	info_hunter_time.text   = "Predator survival:   " + current_tribe_data.ages_mean[Tribes.HUNTER] as String + " sec"
-	info_hunter_ratio.text  = "Predator ratio:   " + round(100 * current_tribe_data.hunter_ratio) as String  + "%"
-	info_hunter_hunger.text = "Predator hunger:   " + current_tribe_data.hunter_food_threshold as String
+	info_prey_time.text     = "Rabbit procreation:   " + current_tribe_data.ages_mean[Tribes.PREY] as String + " sec"
+	info_hunter_time.text   = "Wolf survival:   " + current_tribe_data.ages_mean[Tribes.HUNTER] as String + " sec"
+	info_hunter_ratio.text  = "Wolf ratio:   " + round(100 * current_tribe_data.hunter_ratio) as String  + "%"
+	info_hunter_hunger.text = "Wolf hunger:   " + current_tribe_data.hunter_food_threshold as String
 	info_obs_time.text      = "Observation time:   " + current_observation_time as String + " sec"
 
 ######################### BUILT-INS #########################
