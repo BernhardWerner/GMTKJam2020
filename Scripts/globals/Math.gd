@@ -6,5 +6,5 @@ static func rand_dir() -> Vector2:
 	return Vector2(sin(angle), cos(angle))
 
 static func rand_pos() -> Vector2:
-	return GlobalVariables.living_space.position + Vector2(randf() * GlobalVariables.living_space.size.x, randf() * GlobalVariables.living_space.size.y)
+	return GameManager.living_space.position + Vector2(randf() * GameManager.living_space.size.x, randf() * GameManager.living_space.size.y)
 	

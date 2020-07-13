@@ -1,8 +1,12 @@
 extends Node2D
+class_name GameManager
 
 enum MODES {FIVE, TEN, ENDLESS}
 
+const living_space := Rect2(Vector2.ZERO, OS.window_size)
+
 export var mode : int = MODES.FIVE
+
 var number_of_levels := 5
 
 var all_possible_tribes := []
@@ -15,6 +19,8 @@ var current_observation_time := 30
 var consecutive_fails := 0
 
 var actual_results := []
+
+
 
 onready var info_pop_number := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/PopNumber
 onready var info_speed := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/Speeds
@@ -31,14 +37,14 @@ onready var info_obs_time := $StartInstructions/HBoxContainer/VBoxLeft/InfoBox/O
 ######################### CUSTOM METHODS #########################
 
 func finish_round() -> void:
-	match actual_results.back():
+	match actual_results[-1]:
 		0:
 			$RoundResult/VBoxContainer/ResultLabel.text = "No animal survived..."
 		1:
 			$RoundResult/VBoxContainer/ResultLabel.text = "Only the rabbits survived..."
 		2:
 			$RoundResult/VBoxContainer/ResultLabel.text = "Both wolves and rabbits survived!"
-	if actual_results.back() == player_choices.back():
+	if actual_results[-1] == player_choices[-1]:
 		$RoundResult/VBoxContainer/FeedbackLabel.text = "You made the correct prediction!"
 	else:
 		$RoundResult/VBoxContainer/FeedbackLabel.text = "You made the wrong prediction..."
@@ -124,6 +130,8 @@ func update_info_box() -> void:
 ######################### BUILT-INS #########################
 
 func _ready() -> void:
+	randomize()
+	
 	match mode:
 		MODES.FIVE:
 			number_of_levels = 5
@@ -149,12 +157,12 @@ func _on_BothButton_pressed() -> void:
 
 
 func _on_NoneButton_pressed() -> void:
-	player_choices.push_back(1)
+	player_choices.push_back(0)
 	start_round()
 
 
 func _on_PreyButton_pressed() -> void:
-	player_choices.push_back(0)
+	player_choices.push_back(1)
 	start_round()
 
 

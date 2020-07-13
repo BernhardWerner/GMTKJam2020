@@ -17,11 +17,11 @@ func _ready() -> void:
 
 
 func _on_FiveButton_pressed() -> void:
-	SceneSwitcher.goto_scene("res://Scenes/BestOf5.tscn")
+	SceneSwitcher.load_game(GameManager.MODES.FIVE)
 
 
 func _on_EndlessButton_pressed() -> void:
-	SceneSwitcher.goto_scene("res://Scenes/Endless.tscn")
+	SceneSwitcher.load_game(GameManager.MODES.ENDLESS)
 
 
 func _on_BackButton_pressed() -> void:
@@ -29,4 +29,4 @@ func _on_BackButton_pressed() -> void:
 
 
 func _on_TenButton_pressed() -> void:
-	SceneSwitcher.goto_scene("res://Scenes/BestOf10.tscn")
+	SceneSwitcher.load_game(GameManager.MODES.TEN)

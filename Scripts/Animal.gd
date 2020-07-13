@@ -42,9 +42,14 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if randf() < 0.01:
 		dir = Math.rand_dir()
-	var collision : KinematicCollision2D = move_and_collide(dir * speed * delta)
-	if collision:
-		dir = -dir.reflect(collision.normal)
+	move_and_slide(dir * speed)
+
+	if global_position.x <= GameManager.living_space.position.x or global_position.x >= GameManager.living_space.end.x:
+		dir = -dir.reflect(Vector2.RIGHT)
+		move_and_slide(1.1 * dir * speed)
+	if global_position.y <= GameManager.living_space.position.y or global_position.y >= GameManager.living_space.end.y:
+		dir = -dir.reflect(Vector2.UP)
+		move_and_slide(1.1 * dir * speed)
 		
 				
 ######################### SIGNALS #########################
